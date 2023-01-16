@@ -1,1 +1,1 @@
-The project about heart rate monitors
+The project fighting game
