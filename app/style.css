@@ -76,5 +76,20 @@
     border: 3px solid #ffffff;
     border-radius: 5%;
     height: 54px;
-    width: 54px
+    width: 54px;
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game_over {
+    position: absolute;
+    color: #ffffff;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    text-transform: uppercase;
+    visibility: hidden;
 }

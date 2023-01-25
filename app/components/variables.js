@@ -5,6 +5,8 @@ const ctx = canvas.getContext('2d')
 const gravity = 0.3
 const health1 = document.getElementById('health1')
 const health2 = document.getElementById('health2')
+const timer = document.getElementById('timer')
+let countTime = 10
 
 canvas.width = 1024
 canvas.height = 576
@@ -63,4 +65,4 @@ const keys = {
     }
 }
 
-export { canvas, ctx, gravity, player1, player2, keys, health1, health2 }
+export { canvas, ctx, gravity, player1, player2, keys, health1, health2, timer, countTime }

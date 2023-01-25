@@ -1,5 +1,5 @@
-import { canvas, ctx, gravity, player1, player2, keys, health1, health2 } from "./components/variables.js"
-import attack from "./components/functions.js"
+import { canvas, ctx, gravity, player1, player2, keys, health1, health2, timer, countTime } from "./components/variables.js"
+import { attack, DecrementTime, gameOver } from "./components/functions.js"
 
 function animate () {
     window.requestAnimationFrame(animate)
@@ -33,9 +33,11 @@ function animate () {
         health2.style.width = `${player2.health--}%`
     }
     if (attack(player2, player1) && player2.isAttacking) {
-        health1.style.width = `${player1gi.health--}%`
+        health1.style.width = `${player1.health--}%`
     }
 
+    //end game on health
+    if (player1.health <= 0 || player2.health <= 0) gameOver()
 }
 animate()
 
@@ -91,4 +93,7 @@ window.addEventListener('keyup', function (e) {
             break
     }
 })
+
+//timer
+DecrementTime(countTime, timer)
 
