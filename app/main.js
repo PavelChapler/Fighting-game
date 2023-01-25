@@ -1,10 +1,12 @@
-import { canvas, ctx, gravity, player1, player2, keys, health1, health2, timer, countTime } from "./components/variables.js"
-import { attack, DecrementTime, gameOver } from "./components/functions.js"
+import { canvas, ctx, gravity, player1, player2, keys, health1, health2, timer, countTime, background, shop } from "./components/variables.js"
+import { attack, DecrementTime, gameOver, changePosition, changeKeyFrames } from "./components/functions.js"
 
 function animate () {
     window.requestAnimationFrame(animate)
     ctx.fillStyle = 'black'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
+    background.update()
+    shop.update()
     player1.update()
     player2.update()
 
@@ -22,11 +24,8 @@ function animate () {
         player2.speed.x = -5
     } else player2.speed.x = 0
 
-    //change of positions at the collision
-    if (player1.attackBox.position.x >= player2.position.x + player2.width) {
-        player1.attackBox.position.x = player1.position.x -50
-        player2.attackBox.position.x = player2.position.x
-    }
+    //change of positions at the collision and going beyond borders
+    changePosition(player1, player2)
 
     //player attatck
     if (attack(player1, player2) && player1.isAttacking) {
@@ -38,6 +37,7 @@ function animate () {
 
     //end game on health
     if (player1.health <= 0 || player2.health <= 0) gameOver()
+
 }
 animate()
 
@@ -53,7 +53,10 @@ window.addEventListener('keydown', function (e) {
             player1.lastkey = 'a'
             break
         case 'w':
-            player1.speed.y = -10
+            if (player1.countJump > 0) {
+                player1.speed.y = -10
+                player1.countJump--
+            }
             break
         case ' ':
             player1.attackOn()
@@ -69,7 +72,10 @@ window.addEventListener('keydown', function (e) {
             player2.lastkey = 'ArrowLeft'
             break
         case 'ArrowUp':
-            player2.speed.y = -10
+            if (player2.countJump > 0) {
+                player2.speed.y = -10
+                player2.countJump--
+            }
             break
         case 'Enter':
             player2.attackOn()
@@ -84,7 +90,7 @@ window.addEventListener('keyup', function (e) {
             break
         case 'a':
             keys.a.pressed = false
-            break 
+            break
         case 'ArrowRight':
             keys.ArrowRight.pressed = false
             break
@@ -96,4 +102,6 @@ window.addEventListener('keyup', function (e) {
 
 //timer
 DecrementTime(countTime, timer)
+//animation house
+changeKeyFrames()
 

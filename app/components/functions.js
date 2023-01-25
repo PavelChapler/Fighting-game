@@ -1,4 +1,4 @@
-import {player1, player2} from "./variables.js";
+import {canvas, player1, player2, shop} from "./variables.js";
 
 function attack (hero, enemy) {
     return (hero.attackBox.position.x + hero.attackBox.width >= enemy.position.x &&
@@ -30,4 +30,29 @@ function gameOver () {
     }
 }
 
-export { attack, DecrementTime, gameOver }
+function changePosition (hero, enemy) {
+    if (player1.attackBox.position.x >= player2.position.x + player2.width) {
+        player1.attackBox.position.x = player1.position.x -50
+        player2.attackBox.position.x = player2.position.x
+    }
+    //for player1
+    if (hero.position.x < -hero.width) {
+        hero.position.x = canvas.width
+    } else if (hero.position.x > canvas.width) {
+        hero.position.x = -hero.width
+    }
+    //for player2
+    if (enemy.position.x < -enemy.width) {
+        enemy.position.x = canvas.width
+    } else if (enemy.position.x > canvas.width) {
+        enemy.position.x = -enemy.width
+    }
+}
+
+function changeKeyFrames () {
+    setInterval(() => {
+
+    }, 100)
+}
+
+export { attack, DecrementTime, gameOver, changePosition, changeKeyFrames }

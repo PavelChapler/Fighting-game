@@ -1,6 +1,47 @@
-import {ctx, gravity, canvas} from "./variables.js"
+import {ctx, gravity, canvas, shop} from "./variables.js"
 
 class Sprite {
+    constructor({position, imageSrc, scale = 1, maxFrames = 1, currentFrame = 0}) {
+        this.position = position;
+        this.height = 150;
+        this.width = 50;
+        this.image = new Image();
+        this.image.src = imageSrc
+        this.scale = scale
+        this.maxFrames = maxFrames
+        this.currentFrame = currentFrame
+        this.frameElapsed = 0
+        this.frameHold = 10
+    }
+
+    draw() {
+        ctx.drawImage(
+            this.image,
+            this.currentFrame * this.image.width / this.maxFrames,
+            0,
+            this.image.width / this.maxFrames,
+            this.image.height,
+            this.position.x,
+            this.position.y,
+            (this.image.width / this.maxFrames) * this.scale,
+            this.image.height * this.scale,
+        )
+    }
+
+    update() {
+        this.draw()
+
+        this.frameElapsed++
+
+        if (this.frameElapsed % this.frameHold === 0) {
+            if (this.currentFrame < this.maxFrames - 1) {
+                this.currentFrame++
+            } else this.currentFrame = 0
+        }
+    }
+}
+
+class Fighter {
     constructor({position, speed, direction, color = 'red'}) {
         this.position = position;
         this.speed = speed;
@@ -20,6 +61,7 @@ class Sprite {
         }
         this.isAttacking = false;
         this.health = 100
+        this.countJump = 2
     }
 
     draw() {
@@ -42,8 +84,9 @@ class Sprite {
         this.attackBox.position.x = this.position.x + this.attackBox.direction.x
 
         //for gravity
-        if (this.position.y + this.height + this.speed.y >= canvas.height) {
+        if (this.position.y + this.height + this.speed.y >= canvas.height - 96) {
             this.speed.y = 0
+            this.countJump = 2
         } else this.speed.y += gravity //увеличиваем скорость со временем
     }
 
@@ -55,4 +98,4 @@ class Sprite {
 
 }
 
-export default Sprite
+export { Sprite, Fighter }

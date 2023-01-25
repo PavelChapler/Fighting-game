@@ -1,8 +1,8 @@
-import Sprite from "./classes.js";
+import { Sprite, Fighter } from "./classes.js";
 
 const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
-const gravity = 0.3
+const gravity = 0.4
 const health1 = document.getElementById('health1')
 const health2 = document.getElementById('health2')
 const timer = document.getElementById('timer')
@@ -13,7 +13,25 @@ canvas.height = 576
 
 ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-const player1 = new Sprite({
+const shop = new Sprite({
+    position: {
+        x: 620,
+        y: 128
+    },
+    imageSrc: "./img/shop.png",
+    scale: 2.75,
+    maxFrames: 6
+})
+
+const background = new Sprite({
+    position: {
+        x: 0,
+        y: 0
+    },
+    imageSrc: "./img/background.png",
+})
+
+const player1 = new Fighter({
     position: {
         x: 0,
         y: 0
@@ -28,7 +46,7 @@ const player1 = new Sprite({
     }
 })
 
-const player2 = new Sprite({
+const player2 = new Fighter({
     position: {
         x: 150,
         y: 0
@@ -65,4 +83,4 @@ const keys = {
     }
 }
 
-export { canvas, ctx, gravity, player1, player2, keys, health1, health2, timer, countTime }
+export { canvas, ctx, gravity, player1, player2, keys, health1, health2, timer, countTime, background, shop }
