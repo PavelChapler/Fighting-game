@@ -43,6 +43,35 @@ const player1 = new Fighter({
     direction: {
         x: 0,
         y: 0
+    },
+    imageSrc: '#',
+    maxFrames: 8,
+    scale: 2.5,
+    offset: {
+        x: 215,
+        y: 180
+    },
+    sprites: {
+        idle: {
+            imageSrc: './img/samuraiMack/Idle.png',
+            maxFrames: 8
+        },
+        run: {
+            imageSrc: './img/samuraiMack/Run.png',
+            maxFrames: 8
+        },
+        jump: {
+            imageSrc: './img/samuraiMack/Jump.png',
+            maxFrames: 2
+        },
+        fall: {
+            imageSrc: './img/samuraiMack/Fall.png',
+            maxFrames: 2
+        },
+        attack: {
+            imageSrc: './img/samuraiMack/Attack1.png',
+            maxFrames: 6
+        }
     }
 })
 
@@ -59,7 +88,7 @@ const player2 = new Fighter({
         x: -50,
         y: 0
     },
-    color: 'blue'
+    color: 'blue',
 })
 
 const keys = {

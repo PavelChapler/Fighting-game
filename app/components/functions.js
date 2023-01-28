@@ -49,10 +49,5 @@ function changePosition (hero, enemy) {
     }
 }
 
-function changeKeyFrames () {
-    setInterval(() => {
 
-    }, 100)
-}
-
-export { attack, DecrementTime, gameOver, changePosition, changeKeyFrames }
+export { attack, DecrementTime, gameOver, changePosition }

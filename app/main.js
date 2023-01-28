@@ -1,5 +1,6 @@
 import { canvas, ctx, gravity, player1, player2, keys, health1, health2, timer, countTime, background, shop } from "./components/variables.js"
-import { attack, DecrementTime, gameOver, changePosition, changeKeyFrames } from "./components/functions.js"
+import { attack, DecrementTime, gameOver, changePosition } from "./components/functions.js"
+
 
 function animate () {
     window.requestAnimationFrame(animate)
@@ -8,15 +9,27 @@ function animate () {
     background.update()
     shop.update()
     player1.update()
-    player2.update()
+    // player2.update()
 
     //player1 movement
+    //left right
     if (keys.d.pressed && player1.lastkey === 'd') {
         player1.speed.x = 5
+        player1.switchSprites('run')
     } else if (keys.a.pressed && player1.lastkey === 'a') {
         player1.speed.x = -5
-    } else player1.speed.x = 0
-    
+        player1.switchSprites('run')
+    } else {
+        player1.speed.x = 0
+        player1.switchSprites('idle')
+    }
+    //jump
+    if (player1.speed.y < 0) {
+        player1.switchSprites('jump')
+    } else if (player1.countJump < 2) {
+        player1.switchSprites('fall')
+    }
+
     //player2 movement
     if (keys.ArrowRight.pressed && player2.lastkey === 'ArrowRight') {
         player2.speed.x = 5
@@ -60,6 +73,7 @@ window.addEventListener('keydown', function (e) {
             break
         case ' ':
             player1.attackOn()
+            player1.switchSprites('attack')
             break
 
 
@@ -102,6 +116,4 @@ window.addEventListener('keyup', function (e) {
 
 //timer
 DecrementTime(countTime, timer)
-//animation house
-changeKeyFrames()
 
