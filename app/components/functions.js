@@ -1,6 +1,34 @@
-import {canvas, player1, player2, shop} from "./variables.js";
+import { canvas, health1, health2, keys, player1, player2, shop } from "./variables.js";
 
-function attack (hero, enemy) {
+function movement (hero, keyPressedRight, keyPressedLeft, keyRightString, keyLeftString) {
+    //right / left
+    if (keyPressedRight && hero.lastkey === keyRightString) {
+        hero.speed.x = 5
+        hero.switchSprites('run')
+    } else if (keyPressedLeft && hero.lastkey === keyLeftString) {
+        hero.speed.x = -5
+        hero.switchSprites('run')
+    } else {
+        hero.speed.x = 0
+        hero.switchSprites('idle')
+    }
+    //jump
+    if (hero.speed.y < 0) {
+        hero.switchSprites('jump')
+    } else if (hero.countJump < 2) {
+        hero.switchSprites('fall')
+    }
+}
+
+function attack (hero, enemy, health) {
+    if (isAttacking(hero, enemy) && hero.isAttacking) {
+        enemy.health -= 10
+        health.style.width = `${enemy.health}%`
+        hero.isAttacking = false
+    }
+}
+
+function isAttacking (hero, enemy) {
     return (hero.attackBox.position.x + hero.attackBox.width >= enemy.position.x &&
         hero.attackBox.position.x <= enemy.position.x + enemy.width &&
         hero.attackBox.position.y + hero.attackBox.height >= enemy.position.y &&
@@ -50,4 +78,4 @@ function changePosition (hero, enemy) {
 }
 
 
-export { attack, DecrementTime, gameOver, changePosition }
+export { attack, DecrementTime, gameOver, changePosition, movement }

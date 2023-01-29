@@ -1,5 +1,5 @@
 import { canvas, ctx, gravity, player1, player2, keys, health1, health2, timer, countTime, background, shop } from "./components/variables.js"
-import { attack, DecrementTime, gameOver, changePosition } from "./components/functions.js"
+import { attack, DecrementTime, gameOver, changePosition, movement } from "./components/functions.js"
 
 
 function animate () {
@@ -9,44 +9,17 @@ function animate () {
     background.update()
     shop.update()
     player1.update()
-    // player2.update()
+    player2.update()
 
-    //player1 movement
-    //left right
-    if (keys.d.pressed && player1.lastkey === 'd') {
-        player1.speed.x = 5
-        player1.switchSprites('run')
-    } else if (keys.a.pressed && player1.lastkey === 'a') {
-        player1.speed.x = -5
-        player1.switchSprites('run')
-    } else {
-        player1.speed.x = 0
-        player1.switchSprites('idle')
-    }
-    //jump
-    if (player1.speed.y < 0) {
-        player1.switchSprites('jump')
-    } else if (player1.countJump < 2) {
-        player1.switchSprites('fall')
-    }
-
-    //player2 movement
-    if (keys.ArrowRight.pressed && player2.lastkey === 'ArrowRight') {
-        player2.speed.x = 5
-    } else if (keys.ArrowLeft.pressed && player2.lastkey === 'ArrowLeft') {
-        player2.speed.x = -5
-    } else player2.speed.x = 0
+    movement(player1, keys.d.pressed, keys.a.pressed, 'd', 'a')
+    movement(player2, keys.ArrowRight.pressed, keys.ArrowLeft.pressed, 'ArrowRight', 'ArrowLeft')
 
     //change of positions at the collision and going beyond borders
     changePosition(player1, player2)
 
-    //player attatck
-    if (attack(player1, player2) && player1.isAttacking) {
-        health2.style.width = `${player2.health--}%`
-    }
-    if (attack(player2, player1) && player2.isAttacking) {
-        health1.style.width = `${player1.health--}%`
-    }
+    //players attatck
+    attack(player1, player2, health2)
+    attack(player2, player1, health1)
 
     //end game on health
     if (player1.health <= 0 || player2.health <= 0) gameOver()
@@ -93,6 +66,7 @@ window.addEventListener('keydown', function (e) {
             break
         case 'Enter':
             player2.attackOn()
+            player2.switchSprites('attack')
             break
     }
 })

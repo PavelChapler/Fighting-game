@@ -16,7 +16,6 @@ class Sprite {
         this.frameElapsed = 0
         this.frameHold = 10
         this.offset = offset
-
     }
 
     draw() {
@@ -50,7 +49,8 @@ class Fighter extends Sprite{
     constructor({
             position, speed, direction, color = 'red',
             imageSrc ='#', scale = 1, maxFrames = 1,
-            currentFrame = 0, offset = {x: 0, y: 0}, sprites
+            currentFrame = 0, offset = {x: 0, y: 0}, sprites,
+            frameHold = 5
     }) {
         super({imageSrc, scale, maxFrames, currentFrame})
         this.position = position;
@@ -70,10 +70,11 @@ class Fighter extends Sprite{
 
         }
         this.isAttacking = false;
+        this.alreadyAttack = false;
         this.health = 100
         this.countJump = 2
         this.frameElapsed = 0
-        this.frameHold = 5
+        this.frameHold = frameHold
         this.offset = offset
         this.sprites = sprites
         for (let sprite in this.sprites) {
@@ -103,8 +104,10 @@ class Fighter extends Sprite{
 
     attackOn() {
         //прописать здесь функцию рассчитывающую разный урон в зависимости от попадания
-        this.isAttacking = true
-        setTimeout(() => this.isAttacking = false, 200)
+        if (!this.alreadyAttack) this.isAttacking = true
+        this.alreadyAttack = true
+        setTimeout(() => this.alreadyAttack = false, 1000)
+        setTimeout(() => this.isAttacking = false, 500)
     }
 
     switchSprites(sprite) {

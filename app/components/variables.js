@@ -88,7 +88,37 @@ const player2 = new Fighter({
         x: -50,
         y: 0
     },
+    imageSrc: './img/kenji/Idle.png',
     color: 'blue',
+    scale: 2.5,
+    maxFrames: 4,
+    frameHold: 8,
+    offset: {
+        x: 215,
+        y: 195
+    },
+    sprites: {
+        idle: {
+            imageSrc: './img/kenji/Idle.png',
+            maxFrames: 4
+        },
+        run: {
+            imageSrc: './img/kenji/Run.png',
+            maxFrames: 8
+        },
+        jump: {
+            imageSrc: './img/kenji/Jump.png',
+            maxFrames: 2
+        },
+        fall: {
+            imageSrc: './img/kenji/Fall.png',
+            maxFrames: 2
+        },
+        attack: {
+            imageSrc: './img/kenji/Attack1.png',
+            maxFrames: 4
+        }
+    }
 })
 
 const keys = {
