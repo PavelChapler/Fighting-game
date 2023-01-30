@@ -16,6 +16,7 @@ class Sprite {
         this.frameElapsed = 0
         this.frameHold = 10
         this.offset = offset
+        this.isLive = true
     }
 
     draw() {
@@ -84,10 +85,21 @@ class Fighter extends Sprite{
         this.isLive = true
     }
 
+    animateFrames() {
+        this.frameElapsed++
 
+        if (this.frameElapsed % this.frameHold === 0) {
+            if (this.currentFrame < this.maxFrames - 1) {
+                this.currentFrame++
+            } else this.currentFrame = 0
+        }
+    }
 
     update() {
-        super.update()
+        this.draw()
+
+        if (this.isLive) this.animateFrames()
+        if (!this.isLive) return
 
         this.position.y += this.speed.y
         this.position.x += this.speed.x
@@ -117,6 +129,7 @@ class Fighter extends Sprite{
 
     switchSprites(sprite) {
         if (this.image === this.sprites.death.image && this.currentFrame < this.sprites.death.maxFrames - 1){
+            if (this.currentFrame === this.sprites.death.maxFrames - 2) this.isLive = false
             return
         }
         if (this.image === this.sprites.attack.image && this.currentFrame < this.sprites.attack.maxFrames - 1){

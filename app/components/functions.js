@@ -58,13 +58,10 @@ function gameOver () {
     if (player1.health > player2.health) {
         document.getElementById('gameOver').textContent = 'player 1 Wins!'
         player2.switchSprites('death')
-        player2.isLive = false
-        player2.currentFrame = player2.maxFrames - 1
     }
     if (player1.health < player2.health) {
         document.getElementById('gameOver').textContent = 'player 2 Wins!'
         player1.switchSprites('death')
-        player1.isLive = false
     }
 }
 
