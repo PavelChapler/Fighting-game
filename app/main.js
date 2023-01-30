@@ -15,11 +15,11 @@ function animate () {
     movement(player2, keys.ArrowRight.pressed, keys.ArrowLeft.pressed, 'ArrowRight', 'ArrowLeft')
 
     //change of positions at the collision and going beyond borders
-    changePosition(player1, player2)
+    // changePosition(player1, player2)
 
     //players attatck
-    attack(player1, player2, health2)
-    attack(player2, player1, health1)
+    attack(player1, player2, health2, 4, 10, player2)
+    attack(player2, player1, health1, 2, 8, player1)
 
     //end game on health
     if (player1.health <= 0 || player2.health <= 0) gameOver()

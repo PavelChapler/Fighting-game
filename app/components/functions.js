@@ -20,10 +20,15 @@ function movement (hero, keyPressedRight, keyPressedLeft, keyRightString, keyLef
     }
 }
 
-function attack (hero, enemy, health) {
-    if (isAttacking(hero, enemy) && hero.isAttacking) {
-        enemy.health -= 10
+function attack (hero, enemy, health, currentFrame, damage, takeHitPlayer) {
+    if (isAttacking(hero, enemy) && hero.currentFrame === currentFrame) {
+        hero.isAttacking = false
+        enemy.health -= damage
+        if(enemy.health === 4) enemy.health = 0
         health.style.width = `${enemy.health}%`
+        takeHitPlayer.takeHit()
+    }
+    if (isAttacking(hero, enemy) && hero.currentFrame === currentFrame) {
         hero.isAttacking = false
     }
 }
@@ -52,9 +57,14 @@ function gameOver () {
     document.getElementById('gameOver').style.visibility = 'visible'
     if (player1.health > player2.health) {
         document.getElementById('gameOver').textContent = 'player 1 Wins!'
+        player2.switchSprites('death')
+        player2.isLive = false
+        player2.currentFrame = player2.maxFrames - 1
     }
     if (player1.health < player2.health) {
         document.getElementById('gameOver').textContent = 'player 2 Wins!'
+        player1.switchSprites('death')
+        player1.isLive = false
     }
 }
 

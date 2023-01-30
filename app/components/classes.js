@@ -65,8 +65,8 @@ class Fighter extends Sprite{
                 x: this.position.x
             },
             direction,
-            height: 50,
-            width: 100,
+            height: 70,
+            width: 130,
 
         }
         this.isAttacking = false;
@@ -81,37 +81,48 @@ class Fighter extends Sprite{
             sprites[sprite].image = new Image()
             sprites[sprite].image.src = sprites[sprite].imageSrc
         }
+        this.isLive = true
     }
 
 
 
     update() {
         super.update()
+
         this.position.y += this.speed.y
         this.position.x += this.speed.x
 
         //for postiton attackBox
-        this.attackBox.position.y = this.position.y
+        this.attackBox.position.y = this.position.y + this.attackBox.direction.y
         this.attackBox.position.x = this.position.x + this.attackBox.direction.x
+        //attackBox
+        // ctx.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
 
         //for gravity
-        if (this.position.y + this.height + this.speed.y >= canvas.height - 60) {
+        if (this.position.y + this.height + this.speed.y >= canvas.height - 80) {
             this.speed.y = 0
             this.countJump = 2
-            this.position.y = 356
         } else this.speed.y += gravity //увеличиваем скорость со временем
     }
 
     attackOn() {
         //прописать здесь функцию рассчитывающую разный урон в зависимости от попадания
-        if (!this.alreadyAttack) this.isAttacking = true
-        this.alreadyAttack = true
-        setTimeout(() => this.alreadyAttack = false, 1000)
-        setTimeout(() => this.isAttacking = false, 500)
+        this.isAttacking = true
+        setTimeout(() => this.isAttacking = false, 350)
+    }
+
+    takeHit() {
+        this.switchSprites('takeHit')
     }
 
     switchSprites(sprite) {
+        if (this.image === this.sprites.death.image && this.currentFrame < this.sprites.death.maxFrames - 1){
+            return
+        }
         if (this.image === this.sprites.attack.image && this.currentFrame < this.sprites.attack.maxFrames - 1){
+            return
+        }
+        if (this.image === this.sprites.takeHit.image && this.currentFrame < this.sprites.takeHit.maxFrames - 1){
             return
         }
         switch(sprite) {
@@ -149,6 +160,21 @@ class Fighter extends Sprite{
                     this.maxFrames = this.sprites.attack.maxFrames
                     this.currentFrame = 0
                 }
+                break
+            case 'takeHit':
+                if (this.image !== this.sprites.takeHit.image) {
+                    this.image = this.sprites.takeHit.image
+                    this.maxFrames = this.sprites.takeHit.maxFrames
+                    this.currentFrame = 0
+                }
+                break
+            case 'death':
+                if (this.image !== this.sprites.death.image) {
+                    this.image = this.sprites.death.image
+                    this.maxFrames = this.sprites.death.maxFrames
+                    this.currentFrame = 0
+                }
+                break
         }
     }
 

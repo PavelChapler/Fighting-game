@@ -41,12 +41,12 @@ const player1 = new Fighter({
         y: 10
     },
     direction: {
-        x: 0,
-        y: 0
+        x: 120,
+        y: 30
     },
     imageSrc: '#',
     maxFrames: 8,
-    scale: 2.5,
+    scale: 2.65,
     offset: {
         x: 215,
         y: 180
@@ -71,6 +71,14 @@ const player1 = new Fighter({
         attack: {
             imageSrc: './img/samuraiMack/Attack1.png',
             maxFrames: 6
+        },
+        takeHit: {
+            imageSrc: './img/samuraiMack/Take Hit - white silhouette.png',
+            maxFrames: 4
+        },
+        death: {
+            imageSrc: './img/samuraiMack/Death.png',
+            maxFrames: 6
         }
     }
 })
@@ -85,16 +93,16 @@ const player2 = new Fighter({
         y: 5
     },
     direction: {
-        x: -50,
-        y: 0
+        x: -170,
+        y: 30
     },
     imageSrc: './img/kenji/Idle.png',
     color: 'blue',
-    scale: 2.5,
+    scale: 2.65,
     maxFrames: 4,
     frameHold: 8,
     offset: {
-        x: 215,
+        x: 225,
         y: 195
     },
     sprites: {
@@ -117,6 +125,14 @@ const player2 = new Fighter({
         attack: {
             imageSrc: './img/kenji/Attack1.png',
             maxFrames: 4
+        },
+        takeHit: {
+            imageSrc: './img/kenji/Take hit-white3.png',
+            maxFrames: 3
+        },
+        death: {
+            imageSrc: './img/kenji/Death.png',
+            maxFrames: 7
         }
     }
 })
