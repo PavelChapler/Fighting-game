@@ -16,7 +16,6 @@ class Sprite {
         this.frameElapsed = 0
         this.frameHold = 10
         this.offset = offset
-        this.isLive = true
     }
 
     draw() {
@@ -83,6 +82,7 @@ class Fighter extends Sprite{
             sprites[sprite].image.src = sprites[sprite].imageSrc
         }
         this.isLive = true
+        this.score = 0
     }
 
     animateFrames() {
@@ -119,6 +119,7 @@ class Fighter extends Sprite{
 
     attackOn() {
         //прописать здесь функцию рассчитывающую разный урон в зависимости от попадания
+        this.switchSprites('attack')
         this.isAttacking = true
         setTimeout(() => this.isAttacking = false, 350)
     }

@@ -6,7 +6,7 @@ const gravity = 0.4
 const health1 = document.getElementById('health1')
 const health2 = document.getElementById('health2')
 const timer = document.getElementById('timer')
-let countTime = 10
+let countTime = 120
 
 canvas.width = 1024
 canvas.height = 576
@@ -33,7 +33,7 @@ const background = new Sprite({
 
 const player1 = new Fighter({
     position: {
-        x: 0,
+        x: 200,
         y: 0
     },
     speed: {
@@ -85,12 +85,12 @@ const player1 = new Fighter({
 
 const player2 = new Fighter({
     position: {
-        x: 150,
+        x: canvas.width - 300,
         y: 0
     },
     speed: {
         x: 0,
-        y: 5
+        y: 10
     },
     direction: {
         x: -170,

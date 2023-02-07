@@ -24,8 +24,12 @@ function attack (hero, enemy, health, currentFrame, damage, takeHitPlayer) {
     if (isAttacking(hero, enemy) && hero.currentFrame === currentFrame) {
         hero.isAttacking = false
         enemy.health -= damage
-        if(enemy.health === 4) enemy.health = 0
-        health.style.width = `${enemy.health}%`
+        if(enemy.health === 2) enemy.health = 0
+
+        gsap.to(health, {
+            width: `${enemy.health}%`
+        })
+
         takeHitPlayer.takeHit()
     }
     if (isAttacking(hero, enemy) && hero.currentFrame === currentFrame) {
@@ -53,31 +57,48 @@ function DecrementTime (time, timer) {
     }, 1000)
 }
 
+let wonOnce = false
 function gameOver () {
     document.getElementById('gameOver').style.visibility = 'visible'
     if (player1.health > player2.health) {
-        document.getElementById('gameOver').textContent = 'player 1 Wins!'
+        document.getElementById('gameOver').textContent = 'Samurai Mack Wins!'
+
         player2.switchSprites('death')
+
+        if (wonOnce) return
+
+        defineScore(player1, 1)
     }
     if (player1.health < player2.health) {
-        document.getElementById('gameOver').textContent = 'player 2 Wins!'
+        document.getElementById('gameOver').textContent = 'Kenji Wins!'
+
         player1.switchSprites('death')
+
+        if (wonOnce) return
+
+        defineScore(player2, 2)
     }
 }
 
+function defineScore (hero, numPlayer) {
+    ++hero.score
+    document.querySelector(`.score_player${numPlayer}`).innerHTML = String(hero.score)
+    wonOnce = true
+}
+
 function changePosition (hero, enemy) {
-    if (player1.attackBox.position.x >= player2.position.x + player2.width) {
-        player1.attackBox.position.x = player1.position.x -50
-        player2.attackBox.position.x = player2.position.x
-    }
+    // if (player1.attackBox.position.x >= player2.position.x + player2.width) {
+    //     player1.attackBox.position.x = player1.position.x -50
+    //     player2.attackBox.position.x = player2.position.x
+    // }
     //for player1
-    if (hero.position.x < -hero.width) {
+    if (hero.position.x < -hero.width - 40) {
         hero.position.x = canvas.width
     } else if (hero.position.x > canvas.width) {
         hero.position.x = -hero.width
     }
     //for player2
-    if (enemy.position.x < -enemy.width) {
+    if (enemy.position.x < -enemy.width - 40) {
         enemy.position.x = canvas.width
     } else if (enemy.position.x > canvas.width) {
         enemy.position.x = -enemy.width

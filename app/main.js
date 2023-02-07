@@ -15,11 +15,12 @@ function animate () {
     movement(player2, keys.ArrowRight.pressed, keys.ArrowLeft.pressed, 'ArrowRight', 'ArrowLeft')
 
     //change of positions at the collision and going beyond borders
-    // changePosition(player1, player2)
+    changePosition(player1, player2)
+    changePosition(player2, player1)
 
     //players attatck
     attack(player1, player2, health2, 4, 10, player2)
-    attack(player2, player1, health1, 2, 8, player1)
+    attack(player2, player1, health1, 2, 7, player1)
 
     //end game on health
     if (player1.health <= 0 || player2.health <= 0) gameOver()
@@ -45,8 +46,7 @@ window.addEventListener('keydown', function (e) {
             }
             break
         case ' ':
-            player1.attackOn()
-            player1.switchSprites('attack')
+            if (player1.isLive) player1.attackOn()
             break
 
 
@@ -65,8 +65,7 @@ window.addEventListener('keydown', function (e) {
             }
             break
         case 'Enter':
-            player2.attackOn()
-            player2.switchSprites('attack')
+            if (player2.isLive) player2.attackOn()
             break
     }
 })

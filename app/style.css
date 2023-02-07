@@ -1,11 +1,68 @@
 * {
     box-sizing: border-box;
+    font-family: 'VT323', monospace;
+}
+
+body {
+    background: #000000 url("./img/drawing-cartoon-art-of-wooddddd-texture-pattern-landscape-eps10-wide-template-background-illustration-free-vector2.png");
+    background-size: 450px 722px;
+}
+
+.score_wrapper {
+    width: 130px;
+    position: absolute;
+    top: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+}
+
+.score {
+    display: inline;
+    font-size: 23px;
+    text-transform: uppercase;
+    color: #ffffff;
+    line-height: 0.3;
+}
+
+.score_player1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 15px;
+}
+
+.score_player2 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 15px;
+}
+
+.title {
+    text-align: end;
+    color: black;
+    font-size: 20px;
+    margin: 10px 0 0 0;
+    padding: 0;
+    color: #F2F2F2FF;
+
+}
+
+a {
+    color: #f2f2f2;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 .container {
     width: 1024px;
     position: relative;
-    box-sizing: border-box
+    box-sizing: border-box;
+    margin: 50px auto 0 auto;
+    scale: 1.1;
 }
 
 .wrapper {
@@ -27,7 +84,7 @@
 }
 
 .player1_wrapper .player1 {
-    background: #ff0000;
+    background: #f11616;
     height: 30px;
     width: 100%;
     flex: 0.5 1;
@@ -37,7 +94,9 @@
 
 .player1_wrapper .player1_bg {
     background: rgba(252, 63, 63, 0.46);
-    border: 3px solid #5b1212;
+    border-top: 3px solid #5b1212;
+    border-left: 3px solid #5b1212;
+    border-bottom: 3px solid #5b1212;
     height: 30px;
     width: 100%;
     flex: 0.5 1;
@@ -53,7 +112,7 @@
 }
 
 .player2_wrapper .player2 {
-    background: #ff0000;
+    background: #F11616FF;
     height: 30px;
     width: 100%;
     flex: 0.5 1;
@@ -63,7 +122,9 @@
 
 .player2_wrapper .player2_bg {
     background: rgba(252, 63, 63, 0.46);
-    border: 3px solid #5b1212;
+    border-top: 3px solid #5b1212;
+    border-right: 3px solid #5b1212;
+    border-bottom: 3px solid #5b1212;
     height: 30px;
     width: 100%;
     flex: 0.5 1;
@@ -72,24 +133,26 @@
 }
 
 .timer {
-    background: lightgreen;
-    border: 3px solid #ffffff;
+    background: #80447d;
+    border: 3px solid #310c0c;
     border-radius: 5%;
     height: 54px;
-    width: 54px;
-    font-size: 28px;
+    width: 74px;
+    font-size: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
+    letter-spacing: 1px;
 }
 
 .game_over {
     position: absolute;
     color: #ffffff;
-    top: 120px;
+    top: 140px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 30px;
+    font-size: 36px;
     text-transform: uppercase;
     visibility: hidden;
 }
