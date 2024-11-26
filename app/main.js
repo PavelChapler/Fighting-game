@@ -46,6 +46,7 @@ window.addEventListener('keydown', function (e) {
             }
             break
         case ' ':
+            e.preventDefault()
             if (player1.isLive) player1.attackOn()
             break
 

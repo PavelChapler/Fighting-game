@@ -46,6 +46,7 @@ const player1 = new Fighter({
     },
     imageSrc: '#',
     maxFrames: 8,
+    frameHold: 14,
     scale: 2.65,
     offset: {
         x: 215,
@@ -100,7 +101,7 @@ const player2 = new Fighter({
     color: 'blue',
     scale: 2.65,
     maxFrames: 4,
-    frameHold: 8,
+    frameHold: 16,
     offset: {
         x: 225,
         y: 195
